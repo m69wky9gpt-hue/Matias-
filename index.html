@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Matias — Music</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    color:#fff;
+
+    font-family:Georgia,"Times New Roman",serif;
+
+    background:
+        #050505
+        url("bg.jpg")
+        center center / cover
+        fixed
+        no-repeat;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,.48),
+            rgba(0,0,0,.78)
+        );
+
+    pointer-events:none;
+}
+
+.page{
+    position:relative;
+    z-index:1;
+
+    width:min(92%,900px);
+    margin:auto;
+
+    padding:45px 0 35px;
+
+    text-align:center;
+}
+
+
+/* TOP */
+
+.nav{
+    position:absolute;
+    top:18px;
+    right:0;
+
+    font-family:Arial,sans-serif;
+    font-size:10px;
+    letter-spacing:5px;
+
+    color:#ddd;
+}
+
+
+/* MATIAS */
+
+.logo{
+    font-family:Arial,sans-serif;
+
+    font-size:29px;
+    letter-spacing:12px;
+    font-weight:300;
+
+    margin-top:25px;
+
+    text-shadow:0 3px 18px #000;
+}
+
+.line{
+    width:62px;
+    height:1px;
+
+    margin:20px auto 48px;
+
+    background:rgba(255,255,255,.7);
+}
+
+
+/* TITLU */
+
+.headline{
+    font-size:clamp(40px,7vw,64px);
+
+    line-height:1.02;
+    font-weight:normal;
+
+    margin:0 auto 25px;
+
+    text-shadow:
+        0 3px 22px rgba(0,0,0,.95);
+}
+
+
+/* SUBTITLU */
+
+.tagline{
+    font-family:Arial,sans-serif;
+
+    font-size:11px;
+    letter-spacing:6px;
+
+    color:#d0d0d0;
+
+    margin-bottom:70px;
+}
+
+
+/* MELODII */
+
+.songs{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
+    max-width:820px;
+
+    margin:auto;
+}
+
+.song{
+    width:100%;
+}
+
+
+/* CARD */
+
+.song-card{
+    width:100%;
+
+    min-height:145px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:14px 25px 14px 18px;
+
+    border:1px solid rgba(255,255,255,.32);
+
+    border-radius:17px;
+
+    background:rgba(0,0,0,.45);
+
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.55);
+
+    transition:.3s;
+}
+
+.song-card:hover{
+    transform:translateY(-3px);
+
+    border-color:rgba(255,255,255,.55);
+}
+
+
+/* POZA */
+
+.cover{
+    width:112px;
+    height:112px;
+
+    flex-shrink:0;
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,.8),
+            rgba(0,0,0,.15)
+        ),
+        url("bg.jpg")
+        center / cover;
+
+    border:1px solid rgba(255,255,255,.2);
+}
+
+
+/* TEXT */
+
+.song-info{
+    flex:1;
+
+    text-align:left;
+
+    padding-left:30px;
+}
+
+.song-title{
+    font-size:29px;
+
+    line-height:1.1;
+
+    margin-bottom:12px;
+}
+
+.artist{
+    font-family:Arial,sans-serif;
+
+    font-size:10px;
+
+    letter-spacing:5px;
+
+    color:#aaa;
+}
+
+
+/* PLAY */
+
+.play{
+    width:74px;
+    height:74px;
+
+    flex-shrink:0;
+
+    border:1px solid rgba(255,255,255,.8);
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-family:Arial,sans-serif;
+
+    font-size:25px;
+
+    transition:.25s;
+}
+
+.play:hover{
+    background:rgba(255,255,255,.12);
+
+    transform:scale(1.05);
+}
+
+
+/* YOUTUBE JOS STÂNGA */
+
+.youtube{
+    position:fixed;
+
+    left:28px;
+    bottom:24px;
+
+    z-index:5;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-family:Arial,sans-serif;
+
+    font-size:10px;
+
+    letter-spacing:5px;
+}
+
+.youtube-icon{
+    width:31px;
+    height:22px;
+
+    border-radius:6px;
+
+    background:#ff0000;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:12px;
+}
+
+
+/* MESAJ JOS */
+
+.footer{
+    position:fixed;
+
+    right:28px;
+    bottom:24px;
+
+    z-index:5;
+
+    text-align:right;
+
+    color:#ddd;
+
+    font-family:Arial,sans-serif;
+
+    font-size:10px;
+
+    line-height:1.7;
+
+    letter-spacing:4px;
+
+    text-shadow:0 2px 10px #000;
+}
+
+.footer-line{
+    display:inline-block;
+
+    width:60px;
+    height:1px;
+
+    background:rgba(255,255,255,.55);
+
+    margin-left:15px;
+
+    vertical-align:middle;
+}
+
+
+/* TELEFON */
+
+@media(max-width:700px){
+
+    body{
+        background-attachment:scroll;
+    }
+
+    .page{
+        width:90%;
+
+        padding-top:35px;
+    }
+
+    .nav{
+        display:none;
+    }
+
+    .logo{
+        font-size:25px;
+
+        letter-spacing:8px;
+    }
+
+    .line{
+        margin-bottom:35px;
+    }
+
+    .headline{
+        font-size:43px;
+    }
+
+    .tagline{
+        font-size:9px;
+
+        letter-spacing:3px;
+
+        margin-bottom:45px;
+    }
+
+    .song-card{
+        min-height:115px;
+
+        padding:12px 15px;
+    }
+
+    .cover{
+        width:78px;
+        height:78px;
+    }
+
+    .song-info{
+        padding-left:16px;
+    }
+
+    .song-title{
+        font-size:20px;
+    }
+
+    .artist{
+        font-size:8px;
+
+        letter-spacing:3px;
+    }
+
+    .play{
+        width:52px;
+        height:52px;
+
+        font-size:18px;
+    }
+
+    .youtube{
+        left:18px;
+        bottom:18px;
+    }
+
+    .footer{
+        right:18px;
+        bottom:18px;
+
+        font-size:7px;
+
+        letter-spacing:2px;
+    }
+
+    .footer-line{
+        width:35px;
+        margin-left:8px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<main class="page">
+
+
+    <!-- NAVIGAȚIE -->
+
+    <div class="nav">
+        HOME &nbsp;&nbsp;&nbsp; MUSIC &nbsp;&nbsp;&nbsp; ABOUT
+    </div>
+
+
+    <!-- NUME -->
+
+    <div class="logo">
+        MATIAS
+    </div>
+
+
+    <div class="line"></div>
+
+
+    <!-- TITLU -->
+
+    <h1 class="headline">
+        Cant pentru<br>
+        cel ce m-a salvat
+    </h1>
+
+
+    <!-- SUBTITLU -->
+
+    <div class="tagline">
+        MUZICĂ · CREDINȚĂ · SPERANȚĂ
+    </div>
+
+
+    <!-- MELODII -->
+
+    <section class="songs">
+
+
+        <!-- MÂNA TA -->
+
+        <div class="song">
+
+            <div class="song-card">
+
+                <div class="cover"></div>
+
+                <div class="song-info">
+
+                    <div class="song-title">
+                        Mâna Ta
+                    </div>
+
+                    <div class="artist">
+                        MATIAS
+                    </div>
+
+                </div>
+
+                <a
+                    class="play"
+                    href="https://youtu.be/ySEsa33kgbI"
+                    target="_blank"
+                >
+                    ▶
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- GÂNDUL VEȘNICIEI -->
+
+        <div class="song">
+
+            <div class="song-card">
+
+                <div class="cover"></div>
+
+                <div class="song-info">
+
+                    <div class="song-title">
+                        Gândul veșniciei
+                    </div>
+
+                    <div class="artist">
+                        MATIAS
+                    </div>
+
+                </div>
+
+                <a
+                    class="play"
+                    href="https://youtu.be/KVMaLFDkl-Q"
+                    target="_blank"
+                >
+                    ▶
+                </a>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<!-- YOUTUBE JOS STÂNGA -->
+
+<a
+    class="youtube"
+    href="https://youtu.be/ySEsa33kgbI"
+    target="_blank"
+>
+
+    <span class="youtube-icon">
+        ▶
+    </span>
+
+    YOUTUBE
+
+</a>
+
+
+<!-- MESAJ JOS DREAPTA -->
+
+<div class="footer">
+
+    NU PRIN PUTEREA MEA<br>
+    CI ȚINUT DE MÂNA LUI
+
+    <span class="footer-line"></span>
+
+</div>
+
+
+</body>
+</html>
